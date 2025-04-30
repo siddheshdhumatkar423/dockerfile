@@ -1,5 +1,5 @@
 FROM node:18 AS build
-WORKDIR /app
+WORKDIR /dockerfile
 COPY . .
 RUN npm install && npm run build
 
