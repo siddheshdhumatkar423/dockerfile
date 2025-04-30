@@ -1,18 +1,16 @@
-# Use the official Node.js LTS image
-FROM node:18
+version: '3.8'
 
-# Create and set the working directory
-WORKDIR /app
-
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy app source code
-COPY . .
-
-# Expose the port the app runs on
-EXPOSE 3000
-
-# Default command
-CMD ["npm", "start"]
+services:
+  app:
+    container_name: node-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm start
